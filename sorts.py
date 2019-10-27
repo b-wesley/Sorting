@@ -35,8 +35,29 @@ def quickSort(arr, iLo, iHi):
     #sort the list to the right of the pivot
     quickSort(arr, iPivot +1, iHi)
     
+def insertionSort(arr):
+    #iterate over whole list
+    for i in range(1, len(arr)):
+        curr = arr[i]
+        prev = i - 1
+        
+        #shift element before current index to the current index until current item reaches 
+        #its proper sorted place in the list
+        while prev>= 0 and curr < arr[prev]:
+            arr[prev + 1] = arr[prev]
+            prev -=1
+        arr[prev + 1] = curr
+        
+    
 nums1 = [8, 12 , 4 , 89, 7, 34, 48, 6, 55, 1]
 print(nums1)
 
 quickSort(nums1, 0, len(nums1))
+print('Quick Sort: ' )
+print(nums1)
+
+nums1 = [8, 12 , 4 , 89, 7, 34, 48, 6, 55, 1]
+
+insertionSort(nums1)
+print('Insertion sort: ')
 print(nums1)
