@@ -48,6 +48,53 @@ def insertionSort(arr):
             prev -=1
         arr[prev + 1] = curr
         
+
+def mergeSort(arr, start, end):
+    if start < end:  
+        midpoint = int((start + end) / 2)
+        
+        mergeSort(arr, start, midpoint)
+        mergeSort(arr, midpoint+1, end)
+        
+        merge(arr, start, midpoint, end)
+       
+#merge the two portions of the given list
+def merge(arr, start, mid, end):
+    temp = [0] * (end - start+1)
+    
+    lIndex = start
+    rIndex = mid+1
+    i = 0
+    
+    #iterate through left and right halves, add smallest elements to temp
+    while(lIndex <= mid and rIndex <= end):
+        if (arr[lIndex] <= arr[rIndex]):
+            temp[i] = arr[lIndex]
+            
+            i+=1
+            lIndex+=1
+        else: 
+            temp[i] = arr[rIndex]
+            i+=1
+            rIndex+=1
+    
+    #if the left is longer than right, add the rest of the left  to the end of temp
+    while(lIndex <= mid):
+        temp[i] = arr[lIndex]
+        i += 1
+        lIndex += 1 
+        
+    #if the right is longer than left, add the rest of the right  to the end of temp 
+    while (rIndex <= end):
+        temp[i] = arr[rIndex]
+        i+=1
+        rIndex += 1
+        
+    #copy the temp array into the corresponding portion of the original
+    index = start
+    while(index <= end):
+        arr[index] = temp[index - start]
+        index+=1 
     
 nums1 = [8, 12 , 4 , 89, 7, 34, 48, 6, 55, 1]
 print(nums1)
@@ -60,4 +107,10 @@ nums1 = [8, 12 , 4 , 89, 7, 34, 48, 6, 55, 1]
 
 insertionSort(nums1)
 print('Insertion sort: ')
+print(nums1)
+
+nums1 = [8, 12 , 4 , 89, 7, 34, 48, 6, 55, 1]
+
+mergeSort(nums1, 0, len(nums1) - 1)
+print('Merge sort: ')
 print(nums1)
